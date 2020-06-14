@@ -4,7 +4,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
-from django.utils.translation import gettext_lzy as _
+from django.utils.translation import gettext_lazy as _
 
 # Utilities
 from apps.utils.models import BaseModel
