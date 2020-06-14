@@ -1,0 +1,11 @@
+[run]
+source =
+    apps/inventories
+	apps/locations
+omit =
+    apps/inventories/migrations/*
+    apps/inventories/test_*
+    apps/inventories/tests/*
+	apps/locations/migrations/*
+	apps/locations/test_*
+	apps/locations/tests/*
