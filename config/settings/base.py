@@ -64,6 +64,7 @@ LOCAL_APPS = [
     'apps.core.apps.CoreAppConfig',
     'apps.users.apps.UsersAppConfig',
     'apps.profiles.apps.ProfilesAppConfig',
+    'apps.socials.apps.SocialsAppConfig',
 #    'apps.locations.apps.LocationsAppConfig',
 #    'apps.locations.apps.PersonsAppConfig',
 ]
