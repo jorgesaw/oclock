@@ -2,6 +2,8 @@
 
 # Django
 from django.db import models
+from django.db.models.signals import pre_save
+from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 # Managers
@@ -40,3 +42,12 @@ class SocialNetwork(BaseModel):
 
     def __str__(self):
         return self.name
+
+
+def pre_save_receiver_slug_key(sender, instance, *args, **kwargs):
+    """Pre save receiver."""
+
+    instance.key = slugify(instance.key)
+
+
+pre_save.connect(pre_save_receiver_slug_key, sender=SocialNetwork)

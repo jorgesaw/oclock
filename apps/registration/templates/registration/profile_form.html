@@ -11,152 +11,142 @@
        <div class="panel-heading">Email actualizado exitosamente.</div>
       </div>
     {% endif %}-->
-    <section class="content-header">
-      <h1>
+    <section class="trend-ads">
+      <h2>
         Perfil de usuario
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="{% url 'core:home' %}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Perfil</a></li>
-        <li class="active">Perfil de usuario</li>
-      </ol>
+      </h2>
     </section>
 
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <div class="col-md-3">
-
-          <!-- Profile Image -->
-          <div class="box box-primary">
-            <div class="box-body box-profile">
-              {% if request.user.profile.picture %}
-                <img class="profile-user-img img-responsive img-circle" src="{{request.user.profile.picture.url}}" alt="User profile picture" width="130">
-  
-              {% else %}
-                <img class="profile-user-img img-responsive img-circle" src="{% static 'registration/img/no-avatar.jpg' %}" width="130">
-              {% endif %}
-
-              <h3 class="profile-username text-center">{{ user.get_username }}</h3>
-
-              <p class="text-muted text-center">{{ user.email }}</p>
-
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-
-          <!-- About Me Box -->
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Acerca de mí</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <strong><i class="fa fa-file-text-o margin-r-5"></i> Bio</strong>
-              {% if request.user.profile.biography %}
-                <p>{{ request.user.profile.biography }}.</p>
-              {% else %}
-                <p>Sin descripción.</p>
-              {% endif%}
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
+    <div class="side-bar col-md-3">
+      
+      <div class="featured-ads">
+        <h2 class="sear-head fer">{{ user.username }}</h2>
+        <h3 class="sear-head text-center">{{ user.email }}</h3>
+        <div class="featured-ad">
+          <a href="single.html">
+            {% if request.user.profile.picture %}
+              <img class="profile-user-img img-responsive img-circle text-center" src="{{request.user.profile.picture.url}}" alt="User profile picture" width="130">
+            {% else %}
+              <img class="profile-user-img img-responsive img-circle" src="{% static 'registration/img/no-avatar.jpg' %}" width="130">
+            {% endif %}
+            <div class="clearfix"></div>
+          </a>
         </div>
-        <!-- /.col -->
-        <div class="col-md-9">
-          <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-              <li class="active"><a href="#perfil" data-toggle="tab">Perfil</a></li>
-            </ul>
-            <div class="tab-content">
-
-              <div class="active tab-pane" id="perfil">
-                <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
-                  
-                  <div class="form-group">
-                    <label for="{{ form.bio.id_for_label }}" class="col-sm-2 control-label">Nombre</label>
-
-                    <div class="col-sm-10">
-                      {{ form.first_name }}
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="{{ form.bio.id_for_label }}" class="col-sm-2 control-label">Apellido</label>
-
-                    <div class="col-sm-10">
-                      {{ form.last_name }}
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="{{ form.bio.id_for_label }}" class="col-sm-2 control-label">Bio</label>
-
-                    <div class="col-sm-10">
-                      {{ form.biography }}
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="{{ form.website.id_for_label }}" class="col-sm-2 control-label">Website</label>
-
-                    <div class="col-sm-10">
-                      {{ form.website }}
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-
-                    <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputEmail" value="{{ request.user.email }}" readonly>
-                      <p class="help-block">Si deseas editar el email haz click <a href="{% url 'registration:profile_email' %}">aquí</a>.</p>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-2 control-label">Contraseña</label>
-
-                    <div class="col-sm-10">
-                      <p class="help-block">Si deseas cambiar la contraseña haz click <a href="{% url 'password_change' %}">aquí</a>.</p>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">Imagen de perfil</label>
-
-                    <div class="col-sm-10">
-                      {{ form.picture }}
-                    </div>
-                  </div>
-                  {# {% if request.user.profile.picture %} #}
-                  <!--<div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox"> Borrar imagen actual?
-                        </label>
-                      </div>
-                    </div>
-                  </div>-->
-                  {# {% endif %} #}
-                  
-                  <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <button type="submit" class="btn btn-primary">Actualizar</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <!-- /.tab-pane -->
-            </div>
-            <!-- /.tab-content -->
-          </div>
-          <!-- /.nav-tabs-custom -->
-        </div>
-        <!-- /.col -->
+      <!-- END featured add -->
       </div>
-      <!-- /.row -->
+    <!-- END side bar col-3  -->
+    </div>
 
-    </section>
-    <!-- /.content -->
-  <!--</div>-->
-  <!-- /.content-wrapper -->
+    <div class="ads-display col-md-9">
+      <div class="wrapper">					
+      <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+        <ul id="myTab" class="nav nav-tabs nav-tabs-responsive" role="tablist">
+          <li role="presentation" class="active">
+            <a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">
+            <span class="text">Datos del Perfil</span>
+            </a>
+          </li>
+          <li role="presentation" class="next">
+            <a href="{% url 'shows:show_edit' %}">
+            <span class="text">Datos del Show</span>
+            </a>
+          </li>
+        </ul>
+
+        <div id="myTabContent" class="tab-content">
+          <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
+            <div>
+              <div id="container">
+
+                <ul class="list">
+                  <li>
+                    <div class="post-ad-form">
+                    <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+                      <div class="sign-u">
+                        <div class="sign-up1">
+                          <h4>Nombre:</h4>
+                        </div>
+                        <div class="sign-up2">
+                          {{ form.first_name }}
+                        </div>
+                        <div class="clearfix"> </div>
+                      </div>
+
+                      <div class="sign-u">
+                        <div class="sign-up1">
+                          <h4>Apellido:</h4>
+                        </div>
+                        <div class="sign-up2">
+                          {{ form.last_name }}
+                        </div>
+                        <div class="clearfix"> </div>
+                      </div>
+                      
+                      <div class="sign-u">
+                        <div class="sign-up1">
+                          <h4>Sitio web:</h4>
+                        </div>
+                        <div class="sign-up2">
+                          {{ form.website }}
+                        </div>
+                        <div class="clearfix"> </div>
+                      </div>
+
+                      <div class="sign-u">
+                        <div class="sign-up1">
+                          <h4>Email:</h4>
+                        </div>
+                        <div class="sign-up2">
+                          <input type="email" id="inputEmail" value="{{ request.user.email }}" readonly>
+                          <p class="help-block">Si deseas editar el email haz click <a href="{% url 'registration:profile_email' %}">aquí</a>.</p>
+                        </div>
+                        <div class="clearfix"> </div>
+                      </div>
+
+                      <div class="sign-u">
+                        <div class="sign-up1">
+                          <h4>Contraseña:</h4>
+                        </div>
+                        <div class="sign-up2">
+                          <p class="help-block">Si deseas cambiar la contraseña haz click <a href="{% url 'password_change' %}">aquí</a>.</p>
+                        </div>
+                        <div class="clearfix"> </div>
+                      </div>
+
+                      <div class="sign-u">
+                        <div class="sign-up1">
+                          <h4>Imagen de perfil:</h4>
+                        </div>
+                        <div class="sign-up2">
+                          {{ form.picture }}
+                        </div>
+                        <div class="clearfix"> </div>
+                      </div>
+
+                      <div class="sign-u">
+                        <div class="sign-up1">
+                          <h4>Biografía:</h4>
+                        </div>
+                        <div class="sign-up2">
+                          {{ form.biography }}
+                        </div>
+                        <div class="clearfix"> </div>
+                      </div>
+
+                      <input type="submit" value="Actualizar">
+                      <div class="clearfix"> </div>
+                    </form>
+                  </div>
+                  </li>
+                </ul>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  <!-- END col-9 -->
+  </div>
 {% endblock %}

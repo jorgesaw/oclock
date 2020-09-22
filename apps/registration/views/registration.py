@@ -37,27 +37,15 @@ class SignUpView(CreateView):
         """
         form = super(SignUpView, self).get_form()
         # Modify at real time.
-        form.fields['username'].widget = forms.TextInput(
-            attrs={'class': 'form-control', 'placeholder': 'Nombre de usuario'}
-        ) 
         form.fields['email'].widget = forms.EmailInput(
-            attrs={'class': 'form-control', 'placeholder': 'Direción de e-mail'}
+            attrs={'placeholder': 'E-mail'}
         ) 
         form.fields['password1'].widget = forms.PasswordInput(
             attrs={'class': 'form-control', 'placeholder': 'Contraseña'}
         )
-        form.fields['password2'].widget = forms.TextInput(
+        form.fields['password2'].widget = forms.PasswordInput(
             attrs={'class': 'form-control mb-2', 'placeholder': 'Repetir contraseña'}
         )
-        form.fields['first_name'].widget = forms.TextInput(
-            attrs={'class': 'form-control mb-2', 'placeholder': 'Nombre'}
-
-        )
-        form.fields['last_name'].widget = forms.PasswordInput(
-            attrs={'class': 'form-control mb-2', 'placeholder': 'Apellido'}
-
-        )
-
         return form
 
 @method_decorator(login_required, name='dispatch')

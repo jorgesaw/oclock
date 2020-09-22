@@ -28,5 +28,5 @@ class SocialNetworkAdmin(admin.ModelAdmin):
     fields = ('key', 'name', 'url', 'icon_class_css')
     readonly_fields = ('created', 'modified')
     list_display = ('key', 'name', 'url')
-    list_editable = ('key', 'name', 'url')
+    list_editable = ('name', 'url')
     search_fields = ('name',)

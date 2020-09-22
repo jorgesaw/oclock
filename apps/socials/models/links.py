@@ -5,7 +5,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 # Models
-from apps.socials.models import SocialNetwork
+from apps.socials.models.socials import SocialNetwork
 from apps.utils.models import BaseModelWithoutStatus
 
 

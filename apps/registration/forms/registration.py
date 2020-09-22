@@ -58,9 +58,9 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = ['picture', 'biography', 'website', 'first_name', 'last_name']
         widgets = {
-            'picture': forms.ClearableFileInput(attrs={'class': 'form-control-file mt-3', 'id': 'input_picture'}),
-            'biography': forms.Textarea(attrs={'class': 'form-control mt-3', 'rows':3, 'placeholder': 'Biografía', 'id': 'input_biography'}), 
-            'website': forms.URLInput(attrs={'class': 'form-control mt-3', 'placeholder': 'Página web', 'id': 'input_website'}),
+            'picture': forms.ClearableFileInput(attrs={'id': 'input_picture'}),
+            'biography': forms.Textarea(attrs={'class': 'mess', 'rows':3, 'placeholder': 'Biografía', 'id': 'input_biography'}), 
+            'website': forms.URLInput(attrs={'placeholder': 'Página web', 'id': 'input_website'}),
         }
 
 class EmailForm(forms.ModelForm):

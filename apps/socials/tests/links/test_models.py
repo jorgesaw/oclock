@@ -6,8 +6,6 @@ from django.test import TestCase
 # Social utils tests
 from utils.tests.models.socials import create_link
 
-LINK_USERNAME = 'username0{ñl8'
-
 
 class LinkModelTest(TestCase):
     """Test link model."""

@@ -1,11 +1,7 @@
 [run]
 source =
-    apps/inventories
-	apps/locations
+    apps/socials
 omit =
-    apps/inventories/migrations/*
-    apps/inventories/test_*
-    apps/inventories/tests/*
-	apps/locations/migrations/*
-	apps/locations/test_*
-	apps/locations/tests/*
+    apps/socials/migrations/*
+    apps/socials/test_*
+    apps/socials/tests/*

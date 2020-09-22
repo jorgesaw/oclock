@@ -20,8 +20,10 @@ urlpatterns = [
     # Profiles
     path('profiles/', include(('apps.profiles.urls', 'profiles'), namespace='profiles')),
 
+    # Shows
+    path('shows/', include(('apps.shows.urls', 'shows'), namespace='shows')),
+
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-

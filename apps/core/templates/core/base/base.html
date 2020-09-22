@@ -7,32 +7,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
   <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
   <meta name="author" content="kubelik">
-  <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+  <meta name="keyword" content="Resale Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+  Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design">
   <link rel="shortcut icon" href="{% static 'core/img/placeholder.png' %}">
 
-  <title>{% block title %}{% endblock %} | Kstore</title>
+  <title>{% block title %}{% endblock %} | OClock</title>
     <!-- Bootstrap CSS -->
     <!-- =======================================================
-    Theme Name: AdminLTE
-    Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-    Author: BootstrapMade
-    Author URL: https://bootstrapmade.com
+    Resale a Business Category Flat Bootstrap Responsive Website Template | Jobs :: w3layouts
     ======================================================= --> 
     <!-- Estilos -->
      {% include 'core/includes/css.html' %} 
      {% include 'core/includes/css_style.html' %}
-     <!-- Formato para tables -->
-     {% block tables_css %}
-        {% include 'core/includes/datatables_css.html' %}
-     {% endblock %}
+
      <!-- Archivos css propios de cada página --> 
      {% block css_page %}{% endblock %}
-     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-     <!--[if lt IE 9]>
-     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-     <![endif]-->
      
      <!-- Fuentes -->
      {% include 'core/includes/fonts.html' %}
@@ -43,25 +32,29 @@
   {% block body_page %}
   <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
-            <!-- Navegación -->
-            {% include 'core/includes/header.html' %}
+      <!-- Navegation -->
+      {% include 'core/includes/header.html' %}
 
-            <!-- Aside -->
-            {% include 'core/includes/aside.html' %} 
+      {% block banner %}
+      {% endblock %}
 
-            <!-- Contenido -->
-            <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper">
-
+      <div class="total-ads main-grid-border">
+        <div class="container">
             {% block messages%}
-              {% include 'core/includes/messages.html' %}
+            {% include 'core/includes/messages.html' %}
             {% endblock %}
 
-            {% block content %}{% endblock %}
+            <!-- Aside -->
+            <div class="ads-grid">
+              {% include 'core/includes/aside.html' %} 
+
+              {% block content %}{% endblock %}
             </div>
-            <!-- /.content-wrapper -->
-            <!-- Footter -->
-            {% include 'core/includes/footer.html' %} 
+          <!-- END container--> 
+        </div>	
+      </div>
+        <!-- Footter -->
+        {% include 'core/includes/footer.html' %} 
     </div>
     <!-- Javascript -->
     {% include 'core/includes/js.html' %}

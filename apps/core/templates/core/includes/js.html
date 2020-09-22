@@ -1,38 +1,75 @@
 {% load static %}
 <!-- jQuery 3 -->
-<script src="{% static 'core/vendor/bower_components/jquery/dist/jquery.min.js' %}"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="{% static 'core/vendor/bower_components/jquery-ui/jquery-ui.min.js' %}"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script type="text/javascript" src="{% static 'core/js/jquery.min.js' %}"></script>
+
+<script src="{% static 'core/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'core/js/bootstrap-select.js' %}"></script>
 <script>
-  $.widget.bridge('uibutton', $.ui.button);
+  $(document).ready(function () {
+    var mySelect = $('#first-disabled2');
+
+    $('#special').on('click', function () {
+      mySelect.find('option:selected').prop('disabled', true);
+      mySelect.selectpicker('refresh');
+    });
+
+    $('#special2').on('click', function () {
+      mySelect.find('option:disabled').prop('disabled', false);
+      mySelect.selectpicker('refresh');
+    });
+
+    $('#basic2').selectpicker({
+      liveSearch: true,
+      maxOptions: 1
+    });
+  });
 </script>
-<!-- Bootstrap 3.3.7 -->
-<script src="{% static 'core/vendor/bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
-<!-- Morris.js charts -->
-<script src="{% static 'core/vendor/bower_components/raphael/raphael.min.js' %}"></script>
-<script src="{% static 'core/vendor/bower_components/morris.js/morris.min.js' %}"></script>
-<!-- Sparkline -->
-<script src="{% static 'core/vendor/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js' %}"></script>
-<!-- jvectormap -->
-<script src="{% static 'core/vendor/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js' %}"></script>
-<script src="{% static 'core/vendor/plugins/jvectormap/jquery-jvectormap-world-mill-en.js' %}"></script>
-<!-- jQuery Knob Chart -->
-<script src="{% static 'core/vendor/bower_components/jquery-knob/dist/jquery.knob.min.js' %}"></script>
-<!-- daterangepicker -->
-<script src="{% static 'core/vendor/bower_components/moment/min/moment.min.js' %}"></script>
-<script src="{% static 'core/vendor/bower_components/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
-<!-- datepicker -->
-<script src="{% static 'core/vendor/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
-<!-- Bootstrap WYSIHTML5 -->
-<script src="{% static 'core/vendor/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js' %}"></script>
-<!-- Slimscroll -->
-<script src="{% static 'core/vendor/bower_components/jquery-slimscroll/jquery.slimscroll.min.js' %}"></script>
-<!-- FastClick -->
-<script src="{% static 'core/vendor/bower_components/fastclick/lib/fastclick.js' %}"></script>
-<!-- AdminLTE App -->
-<script src="{% static 'core/dist/js/adminlt.min.js' %}"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{% static 'core/dist/js/pages/dashboard.js' %}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{% static 'core/dist/js/demo.js' %}"></script>
+<script type="text/javascript" src="{% static 'core/js/jquery.leanModal.min.js' %}"></script>
+<link href="{% static 'core/css/jquery.uls.css' %}" rel="stylesheet"/>
+<link href="{% static 'core/css/jquery.uls.grid.css' %}" rel="stylesheet"/>
+<link href="{% static 'core/css/jquery.uls.lcd.css' %}" rel="stylesheet"/>
+<!-- Source -->
+<script src="{% static 'core/js/jquery.uls.data.js' %}"></script>
+<script src="{% static 'core/js/jquery.uls.data.utils.js' %}"></script>
+<script src="{% static 'core/js/jquery.uls.lcd.js' %}"></script>
+<script src="{% static 'core/js/jquery.uls.languagefilter.js' %}"></script>
+<script src="{% static 'core/js/jquery.uls.regionfilter.js' %}"></script>
+<script src="{% static 'core/js/jquery.uls.core.js' %}"></script>
+<script>
+			$( document ).ready( function() {
+				$( '.uls-trigger' ).uls( {
+					onSelect : function( language ) {
+						var languageName = $.uls.data.getAutonym( language );
+						$( '.uls-trigger' ).text( languageName );
+					},
+					quickList: ['en', 'hi', 'he', 'ml', 'ta', 'fr'] //FIXME
+				} );
+			} );
+		</script>
+    <script src="js/tabs.js"></script>
+	
+<script type="text/javascript">
+$(document).ready(function () {    
+var elem=$('#container ul');      
+	$('#viewcontrols a').on('click',function(e) {
+		if ($(this).hasClass('gridview')) {
+			elem.fadeOut(1000, function () {
+				$('#container ul').removeClass('list').addClass('grid');
+				$('#viewcontrols').removeClass('view-controls-list').addClass('view-controls-grid');
+				$('#viewcontrols .gridview').addClass('active');
+				$('#viewcontrols .listview').removeClass('active');
+				elem.fadeIn(1000);
+			});						
+		}
+		else if($(this).hasClass('listview')) {
+			elem.fadeOut(1000, function () {
+				$('#container ul').removeClass('grid').addClass('list');
+				$('#viewcontrols').removeClass('view-controls-grid').addClass('view-controls-list');
+				$('#viewcontrols .gridview').removeClass('active');
+				$('#viewcontrols .listview').addClass('active');
+				elem.fadeIn(1000);
+			});									
+		}
+	});
+});
+</script>

@@ -2,70 +2,66 @@
 {% load static %}
 {% block title %}Login{% endblock %}
 {% block css_page %}
-  {% include 'registration/includes/css.html' %}
 {% endblock %}
 
 {% block body_page %}
-<body class="hold-transition login-page">
-  <div class="login-box">
-  |<div class="login-logo">
-    <a href="{% url 'core:home' %}%"><b>Admin</b>KBE</a>
+<body class="hold-transition skin-blue sidebar-mini">
+  <div class="wrapper">
+    {% include 'core/includes/header.html' %}
+    <div id="page-wrapper" class="sign-in-wrapper">
+      <div class="graphs">
+        <div class="sign-in-form">
+          <div class="sign-in-form-top">
+            <h1>Ingreso</h1>
+          </div>
+          <div class="signin">
+            <div class="signin-rit">
+              <span class="checkbox1">
+                 <label class="checkbox"><input type="checkbox" name="checkbox" checked="">Perdiste contraseña?</label>
+              </span>
+              <p><a href="{% url 'password_reset' %}">Click Aquí</a> </p>
+              <div class="clearfix"> </div>
+            </div>
+
+              <form action="" method="post"><div class="log-input">{% csrf_token %}</div>
+                {% if form.non_field_errors %}
+                   <div class="callout callout-danger alert alert-dismissible">
+                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                       <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                       Usuario o contraseña incorrectos, prueba de nuevo.
+                     </div>
+                 {% endif %}
+
+                <div class="log-input">
+                  <div class="log-input-left">
+                    <input type="email" class="user" name="username" maxlength="254" placeholder="E-mail"
+                      id="id_username" required autofocus/>
+                  </div>
+                  
+                  <div class="clearfix"> </div>
+                </div>
+
+                <div class="log-input">
+                  <div class="log-input-left">
+                    <input type="password" class="lock" name="password" 
+                        id="id_password" placeholder="Password" required/>
+                  </div>
+                  <div class="clearfix"> </div>
+                </div>
+
+                <input type="submit" value="Ingresar">
+            </form>	 
+          </div>
+          <div class="new_people">
+            <h2>Para nuevas personas</h2>
+            <p>Con experiencia práctica en la creación de diseños innovadores, ofrezco soluciones de diseño que aprovechan.</p>
+            <a href="{% url 'registration:signup' %}">Registrarse!</a>
+          </div>
+        </div>
+      </div>
     </div>
-  <!-- /.login-logo -->
-  <div class="login-box-body">
-    <p class="login-box-msg">Regístrate para iniciar sesión</p>
-
-    <form action="" method="post">{% csrf_token %}
-     
-     {% if form.non_field_errors %}
-        <div class="callout callout-danger alert alert-dismissible">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h4><i class="icon fa fa-ban"></i> Error!</h4>
-            Usuario o contraseña incorrectos, prueba de nuevo.
-          </div>
-      {% endif %}
-
-      <div class="form-group has-feedback">
-        <input type="text" class="form-control" name="username" maxlength="254" placeholder="E-mail"
-                id="id_username" required autofocus>
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
-        <input type="password" class="form-control" name="password" 
-                  id="id_password" placeholder="Password" required>
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-      </div>
-      <div class="row">
-        <div class="col-xs-8">
-          <div class="checkbox icheck">
-            <label>
-              <input type="checkbox"> Recuérdame
-            </label>
-          </div>
-        </div>
-        <!-- /.col -->
-        <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Loguearme</button>
-        </div>
-        <!-- /.col -->
-      </div>
-    </form>
-
-  <div class="social-auth-links text-center">
-  <p>- O -</p>
-  <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
-    Facebook</a>
-  <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
-    Google+</a>
+    <!-- END wrapper -->
   </div>
-  <!-- /.social-auth-links -->
-  <a href="{% url 'password_reset' %}">Perdí mi contraseña</a><br>
-  <a href="{% url 'registration:signup' %}" class="text-center">Registrar un nuevo miembro</a>
-  </div>
-  <!-- /.login-box-body -->
-  </div>
-  <!-- /.login-box -->
-
   <!-- Archivos js propios de cada página -->
   {% block js_page %}
     {% include 'registration/includes/js.html' %}

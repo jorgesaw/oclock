@@ -1,0 +1,165 @@
+{% extends 'core/base/base.html' %}
+{% load static %}
+{% block title %}Perfil{% endblock %}
+{% block content %}
+
+<!-- Content Wrapper. Contains page content -->
+  <!--<div class="content-wrapper">-->
+    <!-- Content Header (Page header) -->
+    <!--{% if 'change_email' in request.GET %}
+      <div class="panel panel-success">
+       <div class="panel-heading">Email actualizado exitosamente.</div>
+      </div>
+    {% endif %}-->
+    <section class="trend-ads">
+      <h2>
+        Perfil de usuario
+      </h2>
+    </section>
+
+    <div class="side-bar col-md-3">
+      
+      <div class="featured-ads">
+        <h2 class="sear-head fer">{{ user.first_name }} {{ user.last_name }}</h2>
+        <h3 class="sear-head text-center">{{ user.email }}</h3>
+        <div class="featured-ad">
+          <a href="single.html">
+            {% if request.user.profile.picture %}
+              <img class="profile-user-img img-responsive img-circle text-center" src="{{request.user.profile.picture.url}}" alt="User profile picture" width="130">
+            {% else %}
+              <img class="profile-user-img img-responsive img-circle" src="{% static 'registration/img/no-avatar.jpg' %}" width="130">
+            {% endif %}
+            <div class="clearfix"></div>
+          </a>
+        </div>
+
+        <h2 class="sear-head fer">Show de:</h2>
+        <h3 class="sear-head text-center">{{ user.show.fantasy_name }}</h3>
+        <div class="featured-ad">
+          <a href="single.html">
+            {% if user.show.picture %}
+              <img class="profile-user-img img-responsive" src="{{user.show.picture.url}}" alt="Show picture" width="130">
+            {% else %}
+              <img class="profile-user-img img-responsive img-circle" src="{% static 'registration/img/no-avatar.jpg' %}" width="130">
+            {% endif %}
+            <div class="clearfix"></div>
+          </a>
+        </div>
+      <!-- END featured add -->
+      </div>
+    <!-- END side bar col-3  -->
+    </div>
+
+    <div class="ads-display col-md-9">
+      <div class="wrapper">					
+      <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+        <ul id="myTab" class="nav nav-tabs nav-tabs-responsive" role="tablist">
+          <li role="presentation" class="next">
+            <a href="{% url 'registration:profile' %}">
+            <span class="text">Datos del Perfil</span>
+            </a>
+          </li>
+          <li role="presentation" class="active">
+            <a href="#profile" id="profile-tab" role="tab" data-toggle="tab" aria-controls="profile">
+            <span class="text">Datos del Show</span>
+            </a>
+          </li>
+        </ul>
+
+        <div id="myTabContent" class="tab-content">
+
+          <div role="tabpanel" class="tab-pane fade in active" id="profile" aria-labelledby="profile-tab">
+            <div>
+                <div id="container">
+  
+                  <ul class="list">
+                    <li>
+                      <div class="post-ad-form">
+                      <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+                        <div class="sign-u">
+                          <div class="sign-up1">
+                            <h4>Nombre artístico:</h4>
+                          </div>
+                          <div class="sign-up2">
+                            {{ form.fantasy_name }}
+                          </div>
+                          <div class="clearfix"> </div>
+                        </div>
+  
+                        <div class="sign-u">
+                          <div class="sign-up1">
+                            <h4>Descripción del show:</h4>
+                          </div>
+                          <div class="sign-up2">
+                            {{ form.description }}
+                          </div>
+                          <div class="clearfix"> </div>
+                        </div>
+                        
+                        <div class="sign-u">
+                          <div class="sign-up1">
+                            <h4>Dónde se hace el show?</h4>
+                          </div>
+                          <div class="sign-up2">
+                            {{ form.scope_show }}
+                          </div>
+                          <div class="clearfix"> </div>
+                        </div>
+
+                        <div class="sign-u">
+                            <div class="sign-up1">
+                              <h4>Hasta:</h4>
+                            </div>
+                            <div class="sign-up2">
+                              {{ form.scope_radio }}
+                            </div>
+                            <div class="clearfix"> </div>
+                          </div>
+  
+                        <div class="sign-u">
+                          <div class="sign-up1">
+                            <h4>Evento:</h4>
+                          </div>
+                          <div class="sign-up2">
+                            {{ form.event }}
+                          </div>
+                          <div class="clearfix"> </div>
+                        </div>
+  
+                        <div class="sign-u">
+                          <div class="sign-up1">
+                            <h4>Localidad:</h4>
+                          </div>
+                          <div class="sign-up2">
+                            {{ form.city }}
+                          </div>
+                          <div class="clearfix"> </div>
+                        </div>
+
+                        <div class="sign-u">
+                          <div class="sign-up1">
+                            <h4>Imagen del evento:</h4>
+                          </div>
+                          <div class="sign-up2">
+                            {{ form.picture }}
+                          </div>
+                          <div class="clearfix"> </div>
+                        </div>
+  
+                        <input type="submit" value="Actualizar">
+                        <div class="clearfix"> </div>
+                      </form>
+                    </div>
+                    </li>
+                  </ul>
+                  
+                </div>
+              </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  <!-- END col-9 -->
+  </div>
+{% endblock %}

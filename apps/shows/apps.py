@@ -1,0 +1,12 @@
+"""Shows app"""
+
+# Django
+from django.apps import AppConfig
+from django.utils.translation import gettext_lazy as _
+
+
+class ShowsAppConfig(AppConfig):
+    """Shows app config."""
+
+    name = 'apps.shows'
+    verbose_name = _('shows')
