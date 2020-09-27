@@ -28,6 +28,16 @@
      <!-- Archivos de fuentes propios de cada página -->
      {% block fonts_page %}{% endblock %}
 
+     <!-- Javascript -->
+    {% include 'core/includes/js.html' %}
+    {% include 'core/includes/js_my.html' %}
+    <!-- Scripts para tables -->
+    {% block tables_js %}
+      {% include 'core/includes/datatables_js.html' %}
+    {% endblock %}
+    <!-- Archivos js propios de cada página -->
+    {% block js_page %}{% endblock %}
+
   </head>
   {% block body_page %}
   <body class="hold-transition skin-blue sidebar-mini">
@@ -56,15 +66,6 @@
         <!-- Footter -->
         {% include 'core/includes/footer.html' %} 
     </div>
-    <!-- Javascript -->
-    {% include 'core/includes/js.html' %}
-    {% include 'core/includes/js_my.html' %}
-    <!-- Scripts para tables -->
-    {% block tables_js %}
-      {% include 'core/includes/datatables_js.html' %}
-    {% endblock %}
-    <!-- Archivos js propios de cada página -->
-    {% block js_page %}{% endblock %}
   </body>
 {% endblock %}
 </html>

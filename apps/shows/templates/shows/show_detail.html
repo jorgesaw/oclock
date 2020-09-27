@@ -1,0 +1,107 @@
+{% extends 'core/base/base.html' %}
+{% load static %}
+{% block title %}{{ title }}{% endblock %}
+{% block banner %}
+  {% include 'core/includes/header_banner.html' %}
+{% endblock %}
+{% block content %}
+<!--single-page-->
+<div class="single-page main-grid-border">
+    <div class="container">
+        <div class="product-desc">
+            <div class="col-md-7 product-view">
+                <h2>{{ show.name }}</h2>
+                <p> <i class="glyphicon glyphicon-map-marker"></i><a href="#">{{ show.city.state }}</a>, <a href="#">{{ show.city }}</a></p>
+                <div class="flexslider">
+                    <ul class="slides">
+                        <li data-thumb="{{ show.picture.url }}">
+                            <img src="{{ show.picture.url }}" />
+                        </li>
+                        <li data-thumb="{{ show.picture.url }}">
+                            <img src="{{ show.picture.url }}" />
+                        </li>
+                        <li data-thumb="{{ show.picture.url }}">
+                            <img src="{{ show.picture.url }}" />
+                        </li>
+                    </ul>
+                </div>
+                <!-- FlexSlider -->
+                  <script defer src="{% static 'core/js/jquery.flexslider.js' %}"></script>
+                <link rel="stylesheet" href="{% static 'core/css/flexslider.css' %}" type="text/css" media="screen" />
+
+                    <script>
+                // Can also be used with $(document).ready()
+                $(window).load(function() {
+                  $('.flexslider').flexslider({
+                    animation: "slide",
+                    controlNav: "thumbnails"
+                  });
+                });
+                </script>
+                <!-- //FlexSlider -->
+                <div class="product-details">
+                    <h4>Artista : <a href="#">{{ show.name }}</a></h4>
+                    <h4>Vistas : <strong>150</strong></h4>
+                    <p><strong>Display </strong>: 1.5 inch HD LCD Touch Screen</p>
+                    <p><strong>Resumen</strong> : {{ show.description }}</p>
+
+                    {% if user.is_authenticated and not user.is_client %}
+                        MOSTRAR FORMULARIO DE COMENTARIO
+                    {% endif %}
+                    
+                    <p><strong>Comentarios</strong> :</p>
+                    
+                    {% if comments %}
+                        {% for comment in comments %}
+                            
+                        {% endfor %}
+                    {% else %}
+                        <p>No hay comentarios para este show.</p>
+                    {% endif %}
+
+                
+                </div>
+            </div>
+            <div class="col-md-5 product-details-grid">
+                <div class="item-price">
+                    <div class="product-price">
+                        <p class="p-price">Price</p>
+                        <h3 class="rate">$ 259</h3>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="condition">
+                        <p class="p-price">Condition</p>
+                        <h4>Good</h4>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="itemtype">
+                        <p class="p-price">Tipo de evento</p>
+                        <h4>{{ show.event }}</h4>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="interested text-center">
+                    <h4>Interesado en este show?<small> Contacta para tenerlo!</small></h4>
+                    <p><i class="glyphicon glyphicon-earphone"></i>{{ show.user.phone_number|default:"Sin número de contacto para este show." }}</p>
+                </div>
+                    <div class="tips">
+                    <h4>Safety Tips for Buyers</h4>
+                        <ol>
+                            <li><a href="#">Contrary to popular belief.</a></li>
+                            <li><a href="#">Contrary to popular belief.</a></li>
+                            <li><a href="#">Contrary to popular belief.</a></li>
+                            <li><a href="#">Contrary to popular belief.</a></li>
+                            <li><a href="#">Contrary to popular belief.</a></li>
+                            <li><a href="#">Contrary to popular belief.</a></li>
+                            <li><a href="#">Contrary to popular belief.</a></li>
+                            <li><a href="#">Contrary to popular belief.</a></li>
+                            <li><a href="#">Contrary to popular belief.</a></li>
+                        </ol>
+                    </div>
+            </div>
+        <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<!--//single-page-->
+{% endblock %}

@@ -25,10 +25,10 @@ class ShowAdmin(admin.ModelAdmin):
 
     model = Show
     autocomplete_fields = ('city',)
-    fields = ('fantasy_name', 'event')
+    fields = ('name', 'event')
     readonly_fields = ('created', 'modified')
-    list_display = ('fantasy_name', 'event')
+    list_display = ('name', 'event')
     #list_editable = ('username', 'social', 'order',)
-    search_fields = ('fantasy_name', 'event')
+    search_fields = ('name', 'event')
     list_select_related = ('event',)
     #extra = 1

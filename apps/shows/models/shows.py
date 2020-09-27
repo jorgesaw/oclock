@@ -5,6 +5,7 @@ from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.utils.translation import gettext_lazy as _
+from django.urls import reverse_lazy
 
 # Models
 from apps.shows.models import Event
@@ -13,10 +14,10 @@ from apps.users.models import User
 
 # Utilities
 from apps.utils.images import custom_upload_to
-from apps.utils.models import BaseModel
+from apps.utils.models import BaseModelWithSlugName
 
 
-class Show(BaseModel):
+class Show(BaseModelWithSlugName):
     """Show model.
 
     Model that represents a show performed by a user.
@@ -32,8 +33,8 @@ class Show(BaseModel):
         (SCOPE_ALL_COUNTRY, SCOPE_ALL_COUNTRY)
     )
 
-    fantasy_name = models.CharField(
-        _('fantasy name'),
+    name = models.CharField(
+        _('name'),
         max_length=210,
         unique=True,
         error_messages={
@@ -75,9 +76,20 @@ class Show(BaseModel):
         verbose_name=_('location')
     )
 
+    class Meta:
+        """Meta class."""
+
+        ordering = ['name']
+        verbose_name = "show"
+        verbose_name_plural = "shows"
+
+    def get_absolute_url(self):
+        """Returns the url to access a particular show instance."""
+        return reverse_lazy('shows:show', args=[str(self.slug_name),])
+
     def __str__(self):
-        """Return fantasy name."""
-        return self.fantasy_name
+        """Return name."""
+        return self.name
 
 
 @receiver(post_save, sender=User)
@@ -87,5 +99,5 @@ def ensure_show_exists(sender, instance, **kwargs):
     el usuario se cree una cuenta (post_save) pero nunca ingrese a su perfil.
     """
     if kwargs.get('created', False): # Si acaba de crearse un usuario creamos el perfil
-        Show.objects.get_or_create(user=instance, fantasy_name=instance.username)
+        Show.objects.get_or_create(user=instance, name=instance.username)
         
