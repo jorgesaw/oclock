@@ -4,9 +4,17 @@
 from django.contrib import admin
 
 # Models
-from apps.shows.models import Event, Show
+from apps.shows.models import Comment, Event, Show
 
 
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    """Comment admin."""
+
+    model = Comment
+    fields = ('subject', 'comment', 'rate')
+    list_display = ('subject', 'comment', 'rate', 'user', 'show')
+    
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
     """Event admin."""

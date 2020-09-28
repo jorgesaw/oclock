@@ -2743,6 +2743,12 @@ span.cityname{
     color: rgba(1, 161, 133, 0.57);
     margin: 10px 0 0 0;
 }
+#container .list li .comment {
+    display: block;
+    font-size: 16px;
+    color: rgba(1, 161, 133, 1);
+    margin: 10px 0 0 0;
+}
 #container .list li .list-right.title {
     overflow: hidden;
     word-wrap: break-word;

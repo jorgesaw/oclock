@@ -41,32 +41,111 @@
                 <!-- //FlexSlider -->
                 <div class="product-details">
                     <h4>Artista : <a href="#">{{ show.name }}</a></h4>
-                    <h4>Vistas : <strong>150</strong></h4>
+		    <h4>Visitas : <strong>{{ show.views }}</strong></h4>
                     <p><strong>Display </strong>: 1.5 inch HD LCD Touch Screen</p>
-                    <p><strong>Resumen</strong> : {{ show.description }}</p>
+                    <p><strong>Descripción</strong> : {{ show.description }}</p>
+			{% if messages %}
+				{% for message in messages %}
+					{{message}}
+				{% endfor %}
+			{% endif %}
 
-                    {% if user.is_authenticated and not user.is_client %}
-                        MOSTRAR FORMULARIO DE COMENTARIO
-                    {% endif %}
-                    
-                    <p><strong>Comentarios</strong> :</p>
-                    
+			<div class="feed-back">
+			<h3>¿Qué opinas del show?</h3>
+			<div clas="feed-back-form">
+		    <form class="review-form" action="{% url 'shows:show_add_comment' show.slug_name %}" method="post">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <input name="subject" class="input" type="text" placeholder="Your subject" />
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea name="comment" class="input" placeholder="Your review"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-rating">
+                                                <strong class="text-uppercase">Tu ranking: </strong>
+                                                <div class="stars">
+                                                    <input type="radio" id="star5" name="rate" value="5" /><label for="star5"></label>
+                                                    <input type="radio" id="star4" name="rate" value="4" /><label for="star4"></label>
+                                                    <input type="radio" id="star3" name="rate" value="3" /><label for="star3"></label>
+                                                    <input type="radio" id="star2" name="rate" value="2" /><label for="star2"></label>
+                                                    <input type="radio" id="star1" name="rate" value="1" /><label for="star1"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                   		 {% if user.is_authenticated  %}
+				 <input type="submit" value="Enviar"/> 
+				{% else %}
+					<p>Para comentar <a href="{% url 'login'  %}">loguéate</a>por favor.</p>
+                    		{% endif %}
+                    	</form>
+			</div>
+			<!--END fed-back-form -->
+		<h2 class="head">Comentarios</h2>
+
                     {% if comments %}
+          <div id="container">
+
+            <ul class="list">
+		    {% for comment in comments %} 
+                <li>       
+                  <section class="list-left">
+			  <h5 class="title" style="margin-bottom: .8em;">{{comment.subject}}</h5>
+		    <p class="comment">{{ comment.comment  }}</p>
+		    
+                    <p>{{ comment.user.get_full_name  }}</p>
+                    </section>
+                    <section class="list-right">
+			    <span class="cityname" style="margin-top: 0.8em; margin-bottom: 3.2em">{{ comment.rate  }}</span> 
+
+			    <span class="date">{{ comment.created|date:"d M Y" }}</span>
+			    <span class="cityname">{{ comment.created|date:"G:i" }}</span>
+                    </section>
+                    <div class="clearfix"> </div>           
+                </li>
+
+		{% endfor %} 
+            
+            </ul>
+            
+          </div>
+        
+
+
                         {% for comment in comments %}
-                            
+                          <div class="single-review">
+                              <div class="review-heading">
+				      <div><a href="#"><i class="fa fa-user-o"></i> {{ comment.user.get_full_name }}</a> </div>
+                                                    <div><b>{{ comment.subject }}</b> </div>
+                                                    <div><a href="#"><i class="fa fa-clock-o"></i>{{ comment.created|date:"D d M Y / G:i"}}</a></div>
+
+                                                    <div class="review-rating pull-right">
+                                                        <i class="fa fa-star{% if comment.rate < 0 %}-o empty{% endif %}"></i>
+                                                        <i class="fa fa-star{% if comment.rate < 1 %}-o empty{% endif %}"></i>
+                                                        <i class="fa fa-star{% if comment.rate < 2 %}-o empty{% endif %}"></i>
+                                                        <i class="fa fa-star{% if comment.rate < 3 %}-o empty{% endif %}"></i>
+                                                        <i class="fa fa-star{% if comment.rate < 4 %}-o empty{% endif %}"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="review-body">
+                                                    <p>{{ comment.comment }}</p>
+                                                </div>
+                                            </div>
                         {% endfor %}
-                    {% else %}
+                    {% else %} 
                         <p>No hay comentarios para este show.</p>
                     {% endif %}
-
+		<!--END feed-back -->
+			</div>
                 
                 </div>
             </div>
             <div class="col-md-5 product-details-grid">
                 <div class="item-price">
                     <div class="product-price">
-                        <p class="p-price">Price</p>
-                        <h3 class="rate">$ 259</h3>
+                        <p class="p-price">Ranking</p>
+			<h3 class="rate">{{ show.rate }}</h3>
                         <div class="clearfix"></div>
                     </div>
                     <div class="condition">
@@ -85,7 +164,7 @@
                     <p><i class="glyphicon glyphicon-earphone"></i>{{ show.user.phone_number|default:"Sin número de contacto para este show." }}</p>
                 </div>
                     <div class="tips">
-                    <h4>Safety Tips for Buyers</h4>
+                    <h4>Redes sociales</h4>
                         <ol>
                             <li><a href="#">Contrary to popular belief.</a></li>
                             <li><a href="#">Contrary to popular belief.</a></li>

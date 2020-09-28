@@ -7,8 +7,8 @@ from django import forms
 from apps.shows.models import Comment
 
 
-class CommentForm(forms.ModelForm):
-    """Comment form."""
+class CommentShowForm(forms.ModelForm):
+    """Comment show form."""
 
     class Meta:
         """Meta class."""

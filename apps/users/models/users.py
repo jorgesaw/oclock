@@ -65,6 +65,10 @@ class User(BaseModel, AbstractUser):
         """Return email."""
         return self.email
 
+    def get_full_name(self):
+        """Return last name and first name."""
+        return f'{self.first_name} {self.last_name}'
+
     def get_short_name(self):
         """Return username."""
         return self.username

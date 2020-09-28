@@ -42,6 +42,16 @@ class Show(BaseModelWithSlugName):
         }
     )
 
+    rate = models.SmallIntegerField(
+        _('rate'),
+        default=1      
+    )
+
+    views = models.IntegerField(
+        _('views'),
+        default=0
+    )
+
     description = models.TextField(max_length=3500, null=True, blank=True)
 
     scope_show = models.CharField(

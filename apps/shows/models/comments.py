@@ -1,4 +1,4 @@
-"""COmment model."""
+"""Comment model."""
 
 # Django
 from django.db import models

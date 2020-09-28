@@ -3,4 +3,4 @@ from .shows import (
     ShowSearchForm
 )
 
-from .comments import CommentForm
+from .comments import CommentShowForm
