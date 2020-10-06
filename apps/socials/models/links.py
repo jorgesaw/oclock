@@ -1,4 +1,4 @@
-"""Links models."""
+"""Users socials networks models."""
 
 # Django
 from django.db import models
@@ -9,8 +9,8 @@ from apps.socials.models.socials import SocialNetwork
 from apps.utils.models import BaseModelWithoutStatus
 
 
-class Link(BaseModelWithoutStatus):
-    """Link class."""
+class UserSocialNetwork(BaseModelWithoutStatus):
+    """User social network class."""
 
     username = models.CharField(
         _('username'),
@@ -29,6 +29,7 @@ class Link(BaseModelWithoutStatus):
         ordering = ['order', ]
         verbose_name = _('link')
         verbose_name_plural = _('links')
+        unique_together = ('social', 'username')
 
     def __str__(self):
         return self.username

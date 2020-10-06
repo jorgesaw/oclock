@@ -42,27 +42,17 @@
                 <div class="product-details">
                     <h4>Artista : <a href="#">{{ show.name }}</a></h4>
 		    <h4>Visitas : <strong>{{ show.views }}</strong></h4>
-                    <p><strong>Display </strong>: 1.5 inch HD LCD Touch Screen</p>
                     <p><strong>Descripción</strong> : {{ show.description }}</p>
-			{% if messages %}
-				{% for message in messages %}
-					{{message}}
-				{% endfor %}
-			{% endif %}
 
 			<div class="feed-back">
-			<h3>¿Qué opinas del show?</h3>
-			<div clas="feed-back-form">
-		    <form class="review-form" action="{% url 'shows:show_add_comment' show.slug_name %}" method="post">
-                                        {% csrf_token %}
-                                        <div class="form-group">
-                                            <input name="subject" class="input" type="text" placeholder="Your subject" />
-                                        </div>
-                                        <div class="form-group">
-                                            <textarea name="comment" class="input" placeholder="Your review"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="input-rating">
+				<div class="condition">
+				<h2 class="head">¿Qué opinas del show?</h2>
+				<div class="feed-back-form">
+		    			<form action="{% url 'shows:show_add_comment' show.slug_name %}" method="post">
+                                        	{% csrf_token %}
+                                            <textarea name="comment" placeholder="Comentario"></textarea>
+					    
+                                            <div class="input-rating" style="margin-bottom:1.6em;">
                                                 <strong class="text-uppercase">Tu ranking: </strong>
                                                 <div class="stars">
                                                     <input type="radio" id="star5" name="rate" value="5" /><label for="star5"></label>
@@ -72,67 +62,50 @@
                                                     <input type="radio" id="star1" name="rate" value="1" /><label for="star1"></label>
                                                 </div>
                                             </div>
-                                        </div>
 
-                   		 {% if user.is_authenticated  %}
-				 <input type="submit" value="Enviar"/> 
-				{% else %}
-					<p>Para comentar <a href="{% url 'login'  %}">loguéate</a>por favor.</p>
-                    		{% endif %}
-                    	</form>
+                   		 		{% if user.is_authenticated  %}
+				 			<input type="submit" value="Enviar"/> 
+						{% else %}
+							<p>Para comentar <a href="{% url 'login'  %}">loguéate</a>por favor.</p>
+                    				{% endif %}
+                    			</form>
+				<!-- END condition -->
+				</div>
+
 			</div>
 			<!--END fed-back-form -->
 		<h2 class="head">Comentarios</h2>
 
                     {% if comments %}
-          <div id="container">
+          		<div id="container">
 
-            <ul class="list">
-		    {% for comment in comments %} 
-                <li>       
-                  <section class="list-left">
-			  <h5 class="title" style="margin-bottom: .8em;">{{comment.subject}}</h5>
+            			<ul class="list">
+		    		{% for comment in comments %} 
+                			<li>       
+                  <section class="list-left review-rating">
+			  <span style="margin-right:1em;"><i class="fa fa-user" style="margin-right:1em;"></i>{{ comment.user.get_full_name  }}</span>  
+			  <span><i class="fa fa-clock-o" style="margin-right:1em;"></i>{{ comment.created|date:"d M Y / G:i"  }}</span>
 		    <p class="comment">{{ comment.comment  }}</p>
 		    
-                    <p>{{ comment.user.get_full_name  }}</p>
                     </section>
-                    <section class="list-right">
-			    <span class="cityname" style="margin-top: 0.8em; margin-bottom: 3.2em">{{ comment.rate  }}</span> 
-
-			    <span class="date">{{ comment.created|date:"d M Y" }}</span>
-			    <span class="cityname">{{ comment.created|date:"G:i" }}</span>
+                    <section class="list-right review-rating">
+			    <!-- <span class="cityname" style="margin-top: 0.8em; margin-bottom: 1.6em;">{{ comment.rate  }}</span>--> 
+			    <i class="fa fa-star{% if comment.rate < 1 %}-o empty{% endif %}"> </i>
+			    <i class="fa fa-star{% if comment.rate < 2 %}-o empty{% endif %}"> </i>
+			    <i class="fa fa-star{% if comment.rate < 3 %}-o empty{% endif %}"> </i>
+			    <i class="fa fa-star{% if comment.rate < 4 %}-o empty{% endif %}"> </i>
+			    <i class="fa fa-star{% if comment.rate < 5 %}-o empty{% endif %}"> </i>
                     </section>
                     <div class="clearfix"> </div>           
                 </li>
 
-		{% endfor %} 
+				{% endfor %} 
             
             </ul>
             
           </div>
         
 
-
-                        {% for comment in comments %}
-                          <div class="single-review">
-                              <div class="review-heading">
-				      <div><a href="#"><i class="fa fa-user-o"></i> {{ comment.user.get_full_name }}</a> </div>
-                                                    <div><b>{{ comment.subject }}</b> </div>
-                                                    <div><a href="#"><i class="fa fa-clock-o"></i>{{ comment.created|date:"D d M Y / G:i"}}</a></div>
-
-                                                    <div class="review-rating pull-right">
-                                                        <i class="fa fa-star{% if comment.rate < 0 %}-o empty{% endif %}"></i>
-                                                        <i class="fa fa-star{% if comment.rate < 1 %}-o empty{% endif %}"></i>
-                                                        <i class="fa fa-star{% if comment.rate < 2 %}-o empty{% endif %}"></i>
-                                                        <i class="fa fa-star{% if comment.rate < 3 %}-o empty{% endif %}"></i>
-                                                        <i class="fa fa-star{% if comment.rate < 4 %}-o empty{% endif %}"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="review-body">
-                                                    <p>{{ comment.comment }}</p>
-                                                </div>
-                                            </div>
-                        {% endfor %}
                     {% else %} 
                         <p>No hay comentarios para este show.</p>
                     {% endif %}
@@ -143,9 +116,17 @@
             </div>
             <div class="col-md-5 product-details-grid">
                 <div class="item-price">
-                    <div class="product-price">
+                    <div class="product-price review-rating">
                         <p class="p-price">Ranking</p>
-			<h3 class="rate">{{ show.rate }}</h3>
+			{% if show.rate %}
+			    <i class="fa fa-star{% if show.rate < 1 %}-o empty{% endif %}"> </i>
+			    <i class="fa fa-star{% if show.rate < 2 %}-o empty{% endif %}"> </i>
+			    <i class="fa fa-star{% if show.rate < 3 %}-o empty{% endif %}"> </i>
+			    <i class="fa fa-star{% if show.rate < 4 %}-o empty{% endif %}"> </i>
+			    <i class="fa fa-star{% if show.rate < 5 %}-o empty{% endif %}"> </i>
+			 {% else %}
+				<span class="p-price">Sin ranking para este show.</span>
+			 {% endif %}
                         <div class="clearfix"></div>
                     </div>
                     <div class="condition">

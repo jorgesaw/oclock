@@ -2912,7 +2912,7 @@ section.list-right span.price:after {
 	font-size: 18px;
 }
 .feed-back-form input[type="text"] {
-	 width: 50%;
+	 width: 100%;
     display: BLOCK;
     margin: 10px 0 25px 0;
     padding: 7px;
@@ -2924,7 +2924,7 @@ section.list-right span.price:after {
     border: 1px solid #D3D3D3;
 }
 .feed-back-form textarea {
-	width: 50%;
+	width: 100%;
 	display: BLOCK;
 	margin: 20px 0;
 	color: #585858;
@@ -4805,8 +4805,45 @@ label {
 	}
 }
 
-
-
-
-
+.input-rating .stars  {
+	display: inline-block;
+	vertical-align: top;
+}
+.input-rating .stars input[type="radio"] {
+	display: none;
+}
+.input-rating .stars > label {
+	float: right;
+	cursor: pointer;
+	padding: 0px 3px;
+	margin: 0px;
+	-webkit-transition: 0.3s all;
+	transition: 0.3s all;
+}
+.input-rating .stars>label:hover, .review-form .input-rating .stars>label:hover~label {
+	 -webkit-transform: scale(1.5);
+	 -ms-transform: scale(1.5);
+	transform: scale(1.5);
+}
+.input-rating .stars > label::before {
+	content: "\f006";
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+	color: #DADADA;
+	font-size: 14px;
+	-webkit-transition: 0.3s all;
+	transition: 0.3s all;
+}
+.input-rating .stars>label:hover:before, .input-rating .stars>label:hover~label:before {
+	content: "\f005";
+	color: #FFB656;
+}
+.input-rating .stars>input:checked label:before, .input-rating .stars>input:checked~label:before {
+	content: "\f005";
+	color: #FFB656;
+}
+.review-rating > i {
+	color: #FFB656;
+}
 

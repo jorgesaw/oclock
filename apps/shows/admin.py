@@ -12,8 +12,8 @@ class CommentAdmin(admin.ModelAdmin):
     """Comment admin."""
 
     model = Comment
-    fields = ('subject', 'comment', 'rate')
-    list_display = ('subject', 'comment', 'rate', 'user', 'show')
+    fields = ('comment', 'rate')
+    list_display = ('comment', 'rate', 'user', 'show')
     
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):

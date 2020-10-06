@@ -1,7 +1,11 @@
 """Shows views."""
 
+# Python
+import decimal
+
 # Django
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from django.views.generic import CreateView
@@ -59,7 +63,6 @@ class ShowDetailView(ViewBaseMixin, DetailView):
         show = self.get_object()
         show.views += 1 
         show.save(update_fields=['views',])
-
         comments = Comment.objects.filter(show=show)
         context['comments'] = comments
         return context
@@ -87,23 +90,28 @@ class AddCommentShowView(SuccessMessageMixin, CreateView):
         form = self.form_class(request.POST)
         slug_name_show = self.kwargs['slug_name']
         show = Show.objects.get(slug_name=slug_name_show)
-        #context = self.get_context_data()
-        #import ipdb;ipdb.set_trace()
 
-        #id_show = Show.objects.filter(slug_name=slug_name_show).values_list('id', flat=True)[0]
         if form.is_valid():
             comment = Comment(
-                    subject=form.cleaned_data['subject'],
                     comment=form.cleaned_data['comment'],
                     rate=form.cleaned_data['rate']
             )
             comment.ip = request.META.get('REMOTE_ADDR')
-           # import ipdb;ipdb.set_trace()
             comment.show = show
             comment.user = request.user
 
             comment.save()
-            #return HttpResponseRedirect(url)
+            if not show.rate: # First ranking
+                show.rate = comment.rate
+            new_rate_show = (decimal.Decimal(show.rate) + comment.rate) / 2
+            new_rate_show = decimal.Decimal(new_rate_show).quantize(
+                    decimal.Decimal('1'), rounding=decimal.ROUND_HALF_UP
+            )
+            show.rate = new_rate_show
+            show.save(update_fields=['rate',])
 
-            return HttpResponseRedirect(reverse_lazy('shows:show', kwargs={'slug_name': slug_name_show}))
+            #return HttpResponseRedirect(url)
+            messages.success(request, self.success_message)
+        
+        return HttpResponseRedirect(reverse_lazy('shows:show', kwargs={'slug_name': slug_name_show}))
              

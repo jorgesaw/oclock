@@ -24,6 +24,9 @@ class SocialNetwork(BaseModel):
         null=True,
         blank=True
     )
+
+    order = models.PositiveSmallIntegerField(_('order'), default=0)
+    
     icon_class_css = models.CharField(
         _('icon of css class'),
         max_length=255,

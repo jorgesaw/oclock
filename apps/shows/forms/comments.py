@@ -14,4 +14,4 @@ class CommentShowForm(forms.ModelForm):
         """Meta class."""
 
         model = Comment
-        fields = ('subject', 'comment', 'rate')
+        fields = ('comment', 'rate')

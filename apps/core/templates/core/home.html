@@ -57,7 +57,9 @@
     {% for show in adds_shows %}
       <a href="{% url 'shows:show' show.slug_name %}">
         <div class="featured-ad-left">
+	{% if show.picture %}
           <img src="{{ show.picture.url }}" alt="{{ show.name }}" />
+	{% endif %}
         </div>
         <div class="featured-ad-right">
           <h4>{{ show.name|truncatechars:55 }}</h4>
@@ -90,19 +92,29 @@
 
             <ul class="list">
               {% for show in shows_list %}
-              <a href="{% url 'shows:show' show.slug_name %}">
-                <li>       
-                  <section class="list-left">
-                    <h5 class="title" style="margin-bottom: .8em;">{{ show.name }}</h5>
-                    <h4>{{ show.description|truncatechars:160 }}</h4>
-                    <p class="catpath">{{ show.event }}</p>
-                    </section>
-                    <section class="list-right">
-                    <span class="cityname">{{ show.city }}</span>
-                    </section>
-                    <div class="clearfix"></div>           
+              	<a href="{% url 'shows:show' show.slug_name %}">
+                <li>
+			<img src="{{ show.picture.url  }}">
+                  	<section class="list-left">
+                    		<h5 class="title" style="margin-bottom: .8em;">{{ show.name }}</h5>
+                    		<h4>{{ show.description|truncatechars:160 }}</h4>
+                    		<p class="catpath">{{ show.event }}</p>
+                    	</section>
+                    	<section class="list-right review-rating">
+			{% if show.rate %}
+			    <i class="fa fa-star{% if show.rate < 1 %}-o empty{% endif %}"> </i>
+			    <i class="fa fa-star{% if show.rate < 2 %}-o empty{% endif %}"> </i>
+			    <i class="fa fa-star{% if show.rate < 3 %}-o empty{% endif %}"> </i>
+			    <i class="fa fa-star{% if show.rate < 4 %}-o empty{% endif %}"> </i>
+			    <i class="fa fa-star{% if show.rate < 5 %}-o empty{% endif %}"> </i>
+			 {% else %}
+				<span class="p-price">Sin ranking para este show.</span>
+			 {% endif %}
+                    		<span class="cityname" style="margin-top: 4em;">{{ show.city }}</span>
+                    	</section>
+                    	<div class="clearfix"></div>
                 </li>
-            </a>
+            	</a>
             {% endfor %}
             </ul>
             

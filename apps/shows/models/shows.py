@@ -10,6 +10,7 @@ from django.urls import reverse_lazy
 # Models
 from apps.shows.models import Event
 from apps.locations.models import City
+from apps.socials.models import UserSocialNetwork
 from apps.users.models import User
 
 # Utilities
@@ -44,7 +45,8 @@ class Show(BaseModelWithSlugName):
 
     rate = models.SmallIntegerField(
         _('rate'),
-        default=1      
+        null=True,
+        blank=True
     )
 
     views = models.IntegerField(
@@ -77,6 +79,13 @@ class Show(BaseModelWithSlugName):
         on_delete=models.SET_NULL,
         null=True,
         verbose_name=_('Event type')
+    )
+
+    social = models.ForeignKey(
+        UserSocialNetwork,
+        on_delete=models.CASCADE,
+        null=True,
+        verbose_name=_('Social Network')
     )
 
     city = models.ForeignKey(

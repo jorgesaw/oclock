@@ -28,15 +28,6 @@ class Comment(BaseModel):
     comment = models.CharField(
         _('comment'),
         max_length=210,
-        null=True,
-        blank=True,
-    )
-
-    subject = models.CharField(
-        _('subject'),
-        max_length=50,
-        null=True,
-        blank=True,
     )
 
     rate = models.SmallIntegerField(
@@ -63,5 +54,5 @@ class Comment(BaseModel):
     user = models.ForeignKey('users.User', on_delete=models.CASCADE)
 
     def __str__(self):
-        """Return subject."""
-        return self.subject
+        """Return comment."""
+        return self.comment
