@@ -10,7 +10,6 @@ from django.urls import reverse_lazy
 # Models
 from apps.shows.models import Event
 from apps.locations.models import City
-from apps.socials.models import UserSocialNetwork
 from apps.users.models import User
 
 # Utilities
@@ -81,13 +80,6 @@ class Show(BaseModelWithSlugName):
         verbose_name=_('Event type')
     )
 
-    social = models.ForeignKey(
-        UserSocialNetwork,
-        on_delete=models.CASCADE,
-        null=True,
-        verbose_name=_('Social Network')
-    )
-
     city = models.ForeignKey(
         City,
         on_delete=models.SET_NULL,
@@ -117,6 +109,7 @@ def ensure_show_exists(sender, instance, **kwargs):
     Señal que se encarga de crear un perfil por defecto en caso de que 
     el usuario se cree una cuenta (post_save) pero nunca ingrese a su perfil.
     """
-    if kwargs.get('created', False): # Si acaba de crearse un usuario creamos el perfil
+    if kwargs.get('created', False): 
+        # Si acaba de crearse un usuario creamos el perfil
         Show.objects.get_or_create(user=instance, name=instance.username)
         

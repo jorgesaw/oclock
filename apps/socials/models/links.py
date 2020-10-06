@@ -7,6 +7,7 @@ from django.utils.translation import gettext_lazy as _
 # Models
 from apps.socials.models.socials import SocialNetwork
 from apps.utils.models import BaseModelWithoutStatus
+from apps.shows.models import Show
 
 
 class UserSocialNetwork(BaseModelWithoutStatus):
@@ -16,12 +17,20 @@ class UserSocialNetwork(BaseModelWithoutStatus):
         _('username'),
         max_length=255
     )
+    
+    order = models.PositiveSmallIntegerField(_('order'), default=0)
+    
     social = models.ForeignKey(
         SocialNetwork,
         on_delete=models.CASCADE,
         verbose_name=_('social network')
     )
-    order = models.PositiveSmallIntegerField(_('order'), default=0)
+
+    show = models.ForeignKey(
+        Show,
+        on_delete=models.CASCADE,
+        verbose_name=_('show')
+    )
 
     class Meta:
         """Meta class."""
