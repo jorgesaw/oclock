@@ -5,8 +5,6 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
 # Models
-#from django.contrib.auth.models import User
-#from apps.registration.models import Profile
 from apps.users.models import User
 from apps.users.models import Profile
 
@@ -14,21 +12,37 @@ from apps.users.models import Profile
 class UserCreationWithEmail(UserCreationForm):
     """User creation with email form."""
 
-    email = forms.EmailField(required=True, help_text="Requerido, 254 caracteres como máximo y debe ser válido.")
-    first_name = forms.CharField(max_length=255, required=True, help_text="Requerido, 255 caracteres como máximo y debe ser válido.")
-    last_name = forms.CharField(max_length=255, required=True, help_text="Requerido, 255 caracteres como máximo y debe ser válido.")   
+    email = forms.EmailField(
+            required=True, 
+            help_text="Requerido, 254 caracteres como máximo y debe ser válido."
+    )
+    first_name = forms.CharField(
+            max_length=255, 
+            required=True, 
+            help_text="Requerido, 255 caracteres como máximo y debe ser válido."
+    )
+    last_name = forms.CharField(
+            max_length=255, 
+            required=True, 
+            help_text="Requerido, 255 caracteres como máximo y debe ser válido."
+    )   
 
     class Meta:
         """Meta class."""
 
         model = User
-        fields = ("username", "email", "password1", "password2", "first_name", "last_name")
+        fields = ("email", "password1", "password2", "first_name", "last_name")
 
     def clean_email(self):
         email = self.cleaned_data.get("email")
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError("El email ya está registrado. Prueba con otro.")
         return email
+
+    def save(self,*args, **kwargs):
+        self.instance.username = self.instance.email
+        super(UserCreationWithEmail, self).save(*args, **kwargs)
+
 
 class ProfileForm(forms.ModelForm):
     """Profile form."""
@@ -62,6 +76,7 @@ class ProfileForm(forms.ModelForm):
             'biography': forms.Textarea(attrs={'class': 'mess', 'rows':3, 'placeholder': 'Biografía', 'id': 'input_biography'}), 
             'website': forms.URLInput(attrs={'placeholder': 'Página web', 'id': 'input_website'}),
         }
+
 
 class EmailForm(forms.ModelForm):
     """Email model form."""

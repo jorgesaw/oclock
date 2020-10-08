@@ -24,23 +24,6 @@
               </div>
           {% endif %}
         
-          <div class="sign-u">
-            <div class="sign-up1">
-              <h4>Usuario* :</h4>
-            </div>
-            <div class="sign-up2">
-              {{form.username}}
-                {% if form.username.help_text %}
-                  <small style="color: grey">{{ form.username.help_text }}</small>
-                {% endif %}
-                {% for error in form.username.errors %}
-                  <p style="color: red">{{ error }}</p>
-                {% endfor %}
-                <!--<input type="text" placeholder=" " required=" "/>-->
-              
-            </div>
-            <div class="clearfix"> </div>
-          </div>
         <div class="sign-u">
           <div class="sign-up1">
             <h4>Email* :</h4>

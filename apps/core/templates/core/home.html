@@ -57,9 +57,7 @@
     {% for show in adds_shows %}
       <a href="{% url 'shows:show' show.slug_name %}">
         <div class="featured-ad-left">
-	{% if show.picture %}
-          <img src="{{ show.picture.url }}" alt="{{ show.name }}" />
-	{% endif %}
+	<img src="{% if show.picture %}{{ show.picture.url }}{% else %}{% static 'registration/img/no-avatar.jpg' %}{%endif%}" alt="{{ show.name }}" />
         </div>
         <div class="featured-ad-right">
           <h4>{{ show.name|truncatechars:55 }}</h4>
@@ -94,7 +92,7 @@
               {% for show in shows_list %}
               	<a href="{% url 'shows:show' show.slug_name %}">
                 <li>
-			<img src="{{ show.picture.url  }}">
+			<img src="{% if show.picture %}{{ show.picture.url  }}{% else %}{% static 'registration/img/no-avatar.jpg' %}{% endif %}">
                   	<section class="list-left">
                     		<h5 class="title" style="margin-bottom: .8em;">{{ show.name }}</h5>
                     		<h4>{{ show.description|truncatechars:160 }}</h4>
@@ -121,19 +119,9 @@
           </div>
         </div>
       </div>
-
-    <ul class="pagination pagination-sm">
-      <li><a href="#">Prev</a></li>
-      <li><a href="#">1</a></li>
-      <li><a href="#">2</a></li>
-      <li><a href="#">3</a></li>
-      <li><a href="#">4</a></li>
-      <li><a href="#">5</a></li>
-      <li><a href="#">6</a></li>
-      <li><a href="#">7</a></li>
-      <li><a href="#">8</a></li>
-      <li><a href="#">Next</a></li>
-    </ul>
+	
+      {% include 'core/includes/pagination.html' %}
+    
     </div>
   </div>
 </div>

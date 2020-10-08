@@ -146,17 +146,15 @@
                 </div>
                     <div class="tips">
                     <h4>Redes sociales</h4>
-                        <ol>
-                            <li><a href="#">Contrary to popular belief.</a></li>
-                            <li><a href="#">Contrary to popular belief.</a></li>
-                            <li><a href="#">Contrary to popular belief.</a></li>
-                            <li><a href="#">Contrary to popular belief.</a></li>
-                            <li><a href="#">Contrary to popular belief.</a></li>
-                            <li><a href="#">Contrary to popular belief.</a></li>
-                            <li><a href="#">Contrary to popular belief.</a></li>
-                            <li><a href="#">Contrary to popular belief.</a></li>
-                            <li><a href="#">Contrary to popular belief.</a></li>
-                        </ol>
+		    {% if show.socials.all %}
+                        <ul>
+			{% for social in show.socials.all %}
+				<li><a href="{{social.social.url}}/{{social.username}}" target="a_blank">{{social.social.name}}</a></li>
+			{% endfor %}
+                        </ul>
+			{% else %}
+			<p>Sin redes sociales para este show.</p>
+		    {% endif %}
                     </div>
             </div>
         <div class="clearfix"></div>

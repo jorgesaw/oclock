@@ -29,7 +29,8 @@ class UserSocialNetwork(BaseModelWithoutStatus):
     show = models.ForeignKey(
         Show,
         on_delete=models.CASCADE,
-        verbose_name=_('show')
+        verbose_name=_('show'),
+        related_name='socials' 
     )
 
     class Meta:
