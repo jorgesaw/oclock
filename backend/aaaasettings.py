@@ -34,7 +34,7 @@ DEBUG = env.bool("DEBUG", False)
 
 ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS')
 print("#########################################")
-print(env.str("DJANGO_ALLOWED_HOSTS"))
+print("BASE_DIR: ", BASE_DIR)
 print("#########################################")
 # ALLOWED_HOSTS = [
 #     '3.15.49.217', # Production
