@@ -105,6 +105,10 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # }
 DATABASES = {"default": env.dj_db_url("DATABASE_URL")}
 
+print("#########################################")
+print("DATABASE_URL: ", env.dj_db_url("DATABASE_URL"))
+print("#########################################")
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
